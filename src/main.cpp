@@ -340,6 +340,7 @@ void parseJsonCommand(String message) {
     Serial2.println(GBK_ENTER_INIT);
     pendingAction.type = ACTION_RESET;
     pendingAction.triggerTime = millis() + DELAY_BEFORE_RESET;
+    taskMgr = {}; // 立即清除任务状态，等待复位动作执行时切换模式和播报语音
   } 
   else if (strcmp(idStr, "1") == 0) { // 新任务
     Serial.println("New Task Received.");
@@ -413,7 +414,7 @@ void setup() {
     delay(500); 
   }
   Serial.println("WiFi connected");
-  client.setServer("8.138.244.66", 1883);
+  client.setServer("8.134.254.151", 1883);
   client.setCallback(callback);
 }
 
